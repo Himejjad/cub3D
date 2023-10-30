@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/himejjad/Desktop/CUUB3D",
-      "program": "/Users/himejjad/Desktop/CUUB3D/build/Debug/outDebug"
+      "cwd": "/Users/himejjad/Desktop/cub3D",
+      "program": "/Users/himejjad/Desktop/cub3D/build/Debug/outDebug"
     }
   ]
 }
