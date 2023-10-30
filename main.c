@@ -160,8 +160,12 @@ void    drawwall(t_ray *ray)
         k = 0;
         while (k < (ray->width))
         {
+            
             if (ray->map[i][j] == '1')
                 putpixel(ray,k,p,0xffffff);
+            // else if (ray->map[i][j] == ' ')
+            //     putpixel(ray,k,p,0xff0000);
+
             j++;
             k += 50;
         } 
@@ -222,12 +226,12 @@ void draw_line(t_ray *ray)
         while (h < ray->height && i < ray->width)
         {
             if (h < (ray->height - ray->hit->wallhei) / 2)
-                    my_mlx_pixel_put(ray,i,h,0x0000ff);
+                    my_mlx_pixel_put(ray,i,h,0x000fff);
                 //you can make you texture here for the floor
             else if (h < ((ray->height - ray->hit->wallhei) / 2) + ray->hit->wallhei)
             {
                     if (checkmaphawall(ray,ray->hit->wallhitx,ray->hit->wallhity) == 1)
-                        my_mlx_pixel_put(ray,i,h,0x00ffff);
+                        my_mlx_pixel_put(ray,i,h,0xffffff);
                         // you can make you texture here for the wall
             }
             else
@@ -332,11 +336,15 @@ void    player_position(t_ray *ray)
         j = 0;
         while (ray->map[i][j])
         {
+            // if (ray->map[i][j] == ' ')
+            //     ray->map[i][j] = '1';
+            // printf("=-=-=-=-|%c|-==->%d\n", ray->map[i][j], i);
             if (ray->map[i][j] == 'N' || ray->map[i][j] == 'S' || ray->map[i][j] == 'E' || ray->map[i][j] == 'W')
             {
+                
                 get_rot(ray->map[i][j],ray);
-                ray->map[i][j] = '0';
                 ray->p->px = i * 50;
+                ray->map[i][j] = '0';
                 ray->p->py = j * 50;
                 ray->p->playertunrdirec = 0;
                 ray->p->playerwalkdirec = 0;
@@ -347,8 +355,8 @@ void    player_position(t_ray *ray)
             j++;
         }
         i++;
+printf("%d\n", i);
     }
-
 }
 
 
@@ -368,7 +376,8 @@ int main(int ac, char **av)
     {
         args = get_map(args);
         check_wall2(args);
-        printf("\033[32m OK!\n");
+        printf("\033[32mThe Game Is Runing");
+        printf("\033[32m...!\n");
         // draw(args->copy);
         ray->map = args->copy;
         int i = 0;
@@ -396,6 +405,7 @@ int main(int ac, char **av)
         mlx_hook(ray->mlx_win,3,0L,keyupdate1,ray);
         // mlx_hook(ray->mlx_win,3,0L,map,ray);
         mlx_loop_hook(ray->mlx,draw,ray);
+        printf("EXIT\n");
 	    mlx_loop(ray->mlx);
     }
     else 
